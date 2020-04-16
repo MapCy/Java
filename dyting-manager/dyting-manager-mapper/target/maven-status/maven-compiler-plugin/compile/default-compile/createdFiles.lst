@@ -1,0 +1,7 @@
+com\dyting\mapper\UserMapper.class
+com\dyting\mapper\IpsinfoMapper.class
+com\dyting\mapper\IpAddressMapper.class
+com\dyting\mapper\IpBaseInfoMapper.class
+com\dyting\mapper\CnvdIcsMapper.class
+com\dyting\mapper\PortsinfoAllMapper.class
+com\dyting\mapper\PortsinfoMapper.class

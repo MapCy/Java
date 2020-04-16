@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dyting.mapper.CnvdIcsMapper" >
+  <resultMap id="BaseResultMap" type="com.dyting.pojo.CnvdIcs" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.dyting.pojo.CnvdIcs" extends="BaseResultMap" >
+    <result column="title" property="title" jdbcType="LONGVARCHAR" />
+    <result column="vulnerability_describe" property="vulnerabilityDescribe" jdbcType="LONGVARCHAR" />
+    <result column="reference_link" property="referenceLink" jdbcType="LONGVARCHAR" />
+    <result column="solution" property="solution" jdbcType="LONGVARCHAR" />
+    <result column="finder" property="finder" jdbcType="LONGVARCHAR" />
+    <result column="patch" property="patch" jdbcType="LONGVARCHAR" />
+    <result column="patch_link" property="patchLink" jdbcType="LONGVARCHAR" />
+    <result column="validation_information" property="validationInformation" jdbcType="LONGVARCHAR" />
+    <result column="submission_time" property="submissionTime" jdbcType="LONGVARCHAR" />
+    <result column="cnvd_id" property="cnvdId" jdbcType="LONGVARCHAR" />
+    <result column="release_time" property="releaseTime" jdbcType="LONGVARCHAR" />
+    <result column="damage_grade" property="damageGrade" jdbcType="LONGVARCHAR" />
+    <result column="attack_route" property="attackRoute" jdbcType="LONGVARCHAR" />
+    <result column="attack_complexity" property="attackComplexity" jdbcType="LONGVARCHAR" />
+    <result column="authentication" property="authentication" jdbcType="LONGVARCHAR" />
+    <result column="confidentiality" property="confidentiality" jdbcType="LONGVARCHAR" />
+    <result column="integrity" property="integrity" jdbcType="LONGVARCHAR" />
+    <result column="usability" property="usability" jdbcType="LONGVARCHAR" />
+    <result column="vulnerability_score" property="vulnerabilityScore" jdbcType="LONGVARCHAR" />
+    <result column="impact_product" property="impactProduct" jdbcType="LONGVARCHAR" />
+    <result column="bugtraq_id" property="bugtraqId" jdbcType="LONGVARCHAR" />
+    <result column="cve_id" property="cveId" jdbcType="LONGVARCHAR" />
+    <result column="included_time" property="includedTime" jdbcType="LONGVARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="LONGVARCHAR" />
+    <result column="vulnerability_attachment" property="vulnerabilityAttachment" jdbcType="LONGVARCHAR" />
+    <result column="other_id" property="otherId" jdbcType="LONGVARCHAR" />
+    <result column="type" property="type" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id
+  </sql>
+  <sql id="Blob_Column_List" >
+    title, vulnerability_describe, reference_link, solution, finder, patch, patch_link, 
+    validation_information, submission_time, cnvd_id, release_time, damage_grade, attack_route, 
+    attack_complexity, authentication, confidentiality, integrity, usability, vulnerability_score, 
+    impact_product, bugtraq_id, cve_id, included_time, update_time, vulnerability_attachment, 
+    other_id, type
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.dyting.pojo.CnvdIcsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cnvd_ics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dyting.pojo.CnvdIcsExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from cnvd_ics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from cnvd_ics
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cnvd_ics
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dyting.pojo.CnvdIcsExample" >
+    delete from cnvd_ics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dyting.pojo.CnvdIcs" >
+    insert into cnvd_ics (id, title, vulnerability_describe, 
+      reference_link, solution, finder, 
+      patch, patch_link, validation_information, 
+      submission_time, cnvd_id, release_time, 
+      damage_grade, attack_route, attack_complexity, 
+      authentication, confidentiality, 
+      integrity, usability, vulnerability_score, 
+      impact_product, bugtraq_id, cve_id, 
+      included_time, update_time, vulnerability_attachment, 
+      other_id, type)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=LONGVARCHAR}, #{vulnerabilityDescribe,jdbcType=LONGVARCHAR}, 
+      #{referenceLink,jdbcType=LONGVARCHAR}, #{solution,jdbcType=LONGVARCHAR}, #{finder,jdbcType=LONGVARCHAR}, 
+      #{patch,jdbcType=LONGVARCHAR}, #{patchLink,jdbcType=LONGVARCHAR}, #{validationInformation,jdbcType=LONGVARCHAR}, 
+      #{submissionTime,jdbcType=LONGVARCHAR}, #{cnvdId,jdbcType=LONGVARCHAR}, #{releaseTime,jdbcType=LONGVARCHAR}, 
+      #{damageGrade,jdbcType=LONGVARCHAR}, #{attackRoute,jdbcType=LONGVARCHAR}, #{attackComplexity,jdbcType=LONGVARCHAR}, 
+      #{authentication,jdbcType=LONGVARCHAR}, #{confidentiality,jdbcType=LONGVARCHAR}, 
+      #{integrity,jdbcType=LONGVARCHAR}, #{usability,jdbcType=LONGVARCHAR}, #{vulnerabilityScore,jdbcType=LONGVARCHAR}, 
+      #{impactProduct,jdbcType=LONGVARCHAR}, #{bugtraqId,jdbcType=LONGVARCHAR}, #{cveId,jdbcType=LONGVARCHAR}, 
+      #{includedTime,jdbcType=LONGVARCHAR}, #{updateTime,jdbcType=LONGVARCHAR}, #{vulnerabilityAttachment,jdbcType=LONGVARCHAR}, 
+      #{otherId,jdbcType=LONGVARCHAR}, #{type,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dyting.pojo.CnvdIcs" >
+    insert into cnvd_ics
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="vulnerabilityDescribe != null" >
+        vulnerability_describe,
+      </if>
+      <if test="referenceLink != null" >
+        reference_link,
+      </if>
+      <if test="solution != null" >
+        solution,
+      </if>
+      <if test="finder != null" >
+        finder,
+      </if>
+      <if test="patch != null" >
+        patch,
+      </if>
+      <if test="patchLink != null" >
+        patch_link,
+      </if>
+      <if test="validationInformation != null" >
+        validation_information,
+      </if>
+      <if test="submissionTime != null" >
+        submission_time,
+      </if>
+      <if test="cnvdId != null" >
+        cnvd_id,
+      </if>
+      <if test="releaseTime != null" >
+        release_time,
+      </if>
+      <if test="damageGrade != null" >
+        damage_grade,
+      </if>
+      <if test="attackRoute != null" >
+        attack_route,
+      </if>
+      <if test="attackComplexity != null" >
+        attack_complexity,
+      </if>
+      <if test="authentication != null" >
+        authentication,
+      </if>
+      <if test="confidentiality != null" >
+        confidentiality,
+      </if>
+      <if test="integrity != null" >
+        integrity,
+      </if>
+      <if test="usability != null" >
+        usability,
+      </if>
+      <if test="vulnerabilityScore != null" >
+        vulnerability_score,
+      </if>
+      <if test="impactProduct != null" >
+        impact_product,
+      </if>
+      <if test="bugtraqId != null" >
+        bugtraq_id,
+      </if>
+      <if test="cveId != null" >
+        cve_id,
+      </if>
+      <if test="includedTime != null" >
+        included_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="vulnerabilityAttachment != null" >
+        vulnerability_attachment,
+      </if>
+      <if test="otherId != null" >
+        other_id,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vulnerabilityDescribe != null" >
+        #{vulnerabilityDescribe,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="referenceLink != null" >
+        #{referenceLink,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="solution != null" >
+        #{solution,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finder != null" >
+        #{finder,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patch != null" >
+        #{patch,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patchLink != null" >
+        #{patchLink,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="validationInformation != null" >
+        #{validationInformation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="submissionTime != null" >
+        #{submissionTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cnvdId != null" >
+        #{cnvdId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="releaseTime != null" >
+        #{releaseTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="damageGrade != null" >
+        #{damageGrade,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attackRoute != null" >
+        #{attackRoute,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attackComplexity != null" >
+        #{attackComplexity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="authentication != null" >
+        #{authentication,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="confidentiality != null" >
+        #{confidentiality,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="integrity != null" >
+        #{integrity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="usability != null" >
+        #{usability,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vulnerabilityScore != null" >
+        #{vulnerabilityScore,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="impactProduct != null" >
+        #{impactProduct,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bugtraqId != null" >
+        #{bugtraqId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cveId != null" >
+        #{cveId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="includedTime != null" >
+        #{includedTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vulnerabilityAttachment != null" >
+        #{vulnerabilityAttachment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherId != null" >
+        #{otherId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dyting.pojo.CnvdIcsExample" resultType="java.lang.Integer" >
+    select count(*) from cnvd_ics
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update cnvd_ics
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.title != null" >
+        title = #{record.title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.vulnerabilityDescribe != null" >
+        vulnerability_describe = #{record.vulnerabilityDescribe,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.referenceLink != null" >
+        reference_link = #{record.referenceLink,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.solution != null" >
+        solution = #{record.solution,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.finder != null" >
+        finder = #{record.finder,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patch != null" >
+        patch = #{record.patch,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.patchLink != null" >
+        patch_link = #{record.patchLink,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.validationInformation != null" >
+        validation_information = #{record.validationInformation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.submissionTime != null" >
+        submission_time = #{record.submissionTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.cnvdId != null" >
+        cnvd_id = #{record.cnvdId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.releaseTime != null" >
+        release_time = #{record.releaseTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.damageGrade != null" >
+        damage_grade = #{record.damageGrade,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.attackRoute != null" >
+        attack_route = #{record.attackRoute,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.attackComplexity != null" >
+        attack_complexity = #{record.attackComplexity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.authentication != null" >
+        authentication = #{record.authentication,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.confidentiality != null" >
+        confidentiality = #{record.confidentiality,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.integrity != null" >
+        integrity = #{record.integrity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.usability != null" >
+        usability = #{record.usability,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.vulnerabilityScore != null" >
+        vulnerability_score = #{record.vulnerabilityScore,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.impactProduct != null" >
+        impact_product = #{record.impactProduct,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.bugtraqId != null" >
+        bugtraq_id = #{record.bugtraqId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.cveId != null" >
+        cve_id = #{record.cveId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.includedTime != null" >
+        included_time = #{record.includedTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.vulnerabilityAttachment != null" >
+        vulnerability_attachment = #{record.vulnerabilityAttachment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.otherId != null" >
+        other_id = #{record.otherId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update cnvd_ics
+    set id = #{record.id,jdbcType=INTEGER},
+      title = #{record.title,jdbcType=LONGVARCHAR},
+      vulnerability_describe = #{record.vulnerabilityDescribe,jdbcType=LONGVARCHAR},
+      reference_link = #{record.referenceLink,jdbcType=LONGVARCHAR},
+      solution = #{record.solution,jdbcType=LONGVARCHAR},
+      finder = #{record.finder,jdbcType=LONGVARCHAR},
+      patch = #{record.patch,jdbcType=LONGVARCHAR},
+      patch_link = #{record.patchLink,jdbcType=LONGVARCHAR},
+      validation_information = #{record.validationInformation,jdbcType=LONGVARCHAR},
+      submission_time = #{record.submissionTime,jdbcType=LONGVARCHAR},
+      cnvd_id = #{record.cnvdId,jdbcType=LONGVARCHAR},
+      release_time = #{record.releaseTime,jdbcType=LONGVARCHAR},
+      damage_grade = #{record.damageGrade,jdbcType=LONGVARCHAR},
+      attack_route = #{record.attackRoute,jdbcType=LONGVARCHAR},
+      attack_complexity = #{record.attackComplexity,jdbcType=LONGVARCHAR},
+      authentication = #{record.authentication,jdbcType=LONGVARCHAR},
+      confidentiality = #{record.confidentiality,jdbcType=LONGVARCHAR},
+      integrity = #{record.integrity,jdbcType=LONGVARCHAR},
+      usability = #{record.usability,jdbcType=LONGVARCHAR},
+      vulnerability_score = #{record.vulnerabilityScore,jdbcType=LONGVARCHAR},
+      impact_product = #{record.impactProduct,jdbcType=LONGVARCHAR},
+      bugtraq_id = #{record.bugtraqId,jdbcType=LONGVARCHAR},
+      cve_id = #{record.cveId,jdbcType=LONGVARCHAR},
+      included_time = #{record.includedTime,jdbcType=LONGVARCHAR},
+      update_time = #{record.updateTime,jdbcType=LONGVARCHAR},
+      vulnerability_attachment = #{record.vulnerabilityAttachment,jdbcType=LONGVARCHAR},
+      other_id = #{record.otherId,jdbcType=LONGVARCHAR},
+      type = #{record.type,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update cnvd_ics
+    set id = #{record.id,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dyting.pojo.CnvdIcs" >
+    update cnvd_ics
+    <set >
+      <if test="title != null" >
+        title = #{title,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vulnerabilityDescribe != null" >
+        vulnerability_describe = #{vulnerabilityDescribe,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="referenceLink != null" >
+        reference_link = #{referenceLink,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="solution != null" >
+        solution = #{solution,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="finder != null" >
+        finder = #{finder,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patch != null" >
+        patch = #{patch,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="patchLink != null" >
+        patch_link = #{patchLink,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="validationInformation != null" >
+        validation_information = #{validationInformation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="submissionTime != null" >
+        submission_time = #{submissionTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cnvdId != null" >
+        cnvd_id = #{cnvdId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="releaseTime != null" >
+        release_time = #{releaseTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="damageGrade != null" >
+        damage_grade = #{damageGrade,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attackRoute != null" >
+        attack_route = #{attackRoute,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="attackComplexity != null" >
+        attack_complexity = #{attackComplexity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="authentication != null" >
+        authentication = #{authentication,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="confidentiality != null" >
+        confidentiality = #{confidentiality,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="integrity != null" >
+        integrity = #{integrity,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="usability != null" >
+        usability = #{usability,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vulnerabilityScore != null" >
+        vulnerability_score = #{vulnerabilityScore,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="impactProduct != null" >
+        impact_product = #{impactProduct,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="bugtraqId != null" >
+        bugtraq_id = #{bugtraqId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="cveId != null" >
+        cve_id = #{cveId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="includedTime != null" >
+        included_time = #{includedTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="vulnerabilityAttachment != null" >
+        vulnerability_attachment = #{vulnerabilityAttachment,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="otherId != null" >
+        other_id = #{otherId,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dyting.pojo.CnvdIcs" >
+    update cnvd_ics
+    set title = #{title,jdbcType=LONGVARCHAR},
+      vulnerability_describe = #{vulnerabilityDescribe,jdbcType=LONGVARCHAR},
+      reference_link = #{referenceLink,jdbcType=LONGVARCHAR},
+      solution = #{solution,jdbcType=LONGVARCHAR},
+      finder = #{finder,jdbcType=LONGVARCHAR},
+      patch = #{patch,jdbcType=LONGVARCHAR},
+      patch_link = #{patchLink,jdbcType=LONGVARCHAR},
+      validation_information = #{validationInformation,jdbcType=LONGVARCHAR},
+      submission_time = #{submissionTime,jdbcType=LONGVARCHAR},
+      cnvd_id = #{cnvdId,jdbcType=LONGVARCHAR},
+      release_time = #{releaseTime,jdbcType=LONGVARCHAR},
+      damage_grade = #{damageGrade,jdbcType=LONGVARCHAR},
+      attack_route = #{attackRoute,jdbcType=LONGVARCHAR},
+      attack_complexity = #{attackComplexity,jdbcType=LONGVARCHAR},
+      authentication = #{authentication,jdbcType=LONGVARCHAR},
+      confidentiality = #{confidentiality,jdbcType=LONGVARCHAR},
+      integrity = #{integrity,jdbcType=LONGVARCHAR},
+      usability = #{usability,jdbcType=LONGVARCHAR},
+      vulnerability_score = #{vulnerabilityScore,jdbcType=LONGVARCHAR},
+      impact_product = #{impactProduct,jdbcType=LONGVARCHAR},
+      bugtraq_id = #{bugtraqId,jdbcType=LONGVARCHAR},
+      cve_id = #{cveId,jdbcType=LONGVARCHAR},
+      included_time = #{includedTime,jdbcType=LONGVARCHAR},
+      update_time = #{updateTime,jdbcType=LONGVARCHAR},
+      vulnerability_attachment = #{vulnerabilityAttachment,jdbcType=LONGVARCHAR},
+      other_id = #{otherId,jdbcType=LONGVARCHAR},
+      type = #{type,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
