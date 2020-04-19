@@ -1,0 +1,29 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    			{
+    				"type":"Feature",
+    				"properties":{"name":"Adan","value":4},
+				    "geometry":{
+				        "type":"Point",
+				        "coordinates":[105.380859375,31.57853542647338]
+				        }
+				},
+				{
+    				"type":"Feature",
+    				"properties":{"name":"Bade","value":3},
+				    "geometry":{
+				        "type":"Point",
+				        "coordinates":[116.40,39.90]
+				        }
+				},
+				{
+    				"type":"Feature",
+    				"properties":{"name":"Adan","value":4},
+				    "geometry":{
+				        "type":"Point",
+				        "coordinates":[24.261,106.782]
+				        }
+				}
+	]
+}

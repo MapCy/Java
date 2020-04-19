@@ -13,9 +13,10 @@
 	  GROUP BY city
   </select>
   
-  <select id="selectDistinctCountry" resultType="com.dyting.pojo.IpBaseInfo">
-      SELECT DISTINCT(country)
+  <select id="selectCountry" resultType="com.dyting.common.pojo.threed.CountryInfo">
+      SELECT country,latitude,longitude,COUNT(country) AS ipnum
 	  FROM ip_base_info
+	  GROUP BY country
   </select>
   
   <resultMap id="BaseResultMap" type="com.dyting.pojo.IpBaseInfo" >

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.dyting.common.pojo.Item;
 import com.dyting.common.pojo.PortOrService;
-import com.dyting.common.pojo.threed.ThreedResult;
+import com.dyting.common.pojo.threed.ThreedGeojson;
 
 /*
  * 数据可视化部分
@@ -30,6 +30,6 @@ public interface VisualService {
 	 * @Table ip_base_info 缩写 IBI
 	 * @Param country
 	 */
-	public List<ThreedResult> selectFromIbi(String country);
+	public ThreedGeojson selectFromIbi(String country);
 
 }

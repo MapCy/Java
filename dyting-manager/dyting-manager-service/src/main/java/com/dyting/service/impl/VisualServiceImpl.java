@@ -11,7 +11,10 @@ import org.springframework.stereotype.Service;
 import com.dyting.common.pojo.Item;
 import com.dyting.common.pojo.PortOrService;
 import com.dyting.common.pojo.threed.CityInfo;
-import com.dyting.common.pojo.threed.ThreedResult;
+import com.dyting.common.pojo.threed.CountryInfo;
+import com.dyting.common.pojo.threed.Feature;
+import com.dyting.common.pojo.threed.Geometry;
+import com.dyting.common.pojo.threed.ThreedGeojson;
 import com.dyting.mapper.IpBaseInfoMapper;
 import com.dyting.mapper.PortsinfoMapper;
 import com.dyting.pojo.IpBaseInfo;
@@ -85,34 +88,77 @@ public class VisualServiceImpl implements VisualService {
 
 
 	@Override
-	public List<ThreedResult> selectFromIbi(String country) {
-		List<IpBaseInfo> countryList = new ArrayList<>();
-		List<CityInfo> cityInfos = new ArrayList<>();
+	public ThreedGeojson selectFromIbi(String country) {
+		List<CountryInfo> countryInfos = new ArrayList<>();
+		List<CityInfo> cityInfos = new ArrayList<>(); 
 		
-		List<ThreedResult> threedResults = new ArrayList<>();
+		List<Feature> features = new ArrayList<>();
 		
-		//取出所有国家
-		countryList = ipbaseinfoMapper.selectDistinctCountry();
-		if (countryList.size() < 0 || countryList == null) {
-			return null;
-		}
+		List<ThreedGeojson> thGeojsons = new ArrayList<>();
+
 		//当前端点击某个具体的国家时，才统计每个国家下的各城市ip数量
 		if (country != null) {
-			cityInfos = ipbaseinfoMapper.selectByCountry(country);
-			ThreedResult tResult = new ThreedResult();
-			tResult.setCountry(country);
-			tResult.setCityInfos(cityInfos);
-			threedResults.add(tResult);
+			cityInfos = ipbaseinfoMapper.selectByCountry(country); //取出该国家下的每个城市信息
+			if (cityInfos.size() < 0 && cityInfos == null) {
+				return null;
+			}
+			for(int i = 0; i < cityInfos.size(); i++){
+				//得到单个city对象
+				CityInfo city = cityInfos.get(i);
+				
+				//[1]补全Property
+				Item item = new Item();
+				item.setName(city.getCity());
+				item.setValue(Integer.parseInt(city.getIpnum()));
+			    
+				//[2]补全geometry，且经度在前，纬度在后
+				Geometry geometry = new Geometry();
+				float[] point = new float[2];
+				point[0] = Float.parseFloat(city.getLongitude());
+				point[1] = Float.parseFloat(city.getLatitude());
+				geometry.setType("Point"); //点要素Point
+				geometry.setCoordinates(point);
+				
+				//组装Feature
+				Feature feature = new Feature();
+				feature.setType("Feature"); //geojson固定格式
+				feature.setProperties(item);
+				feature.setGeometry(geometry);
+				
+				features.add(feature);
+			}
 		}else {
-			for(int i = 0; i < countryList.size(); i++){
-				ThreedResult tResult = new ThreedResult();
-				tResult.setCountry(countryList.get(i).getCountry());
-				tResult.setCityInfos(null);
-				threedResults.add(tResult);
+			countryInfos = ipbaseinfoMapper.selectCountry();
+			for(int i = 0; i < countryInfos.size(); i++){
+				//得到单个IpBaseInfo类型的country对象
+				CountryInfo countryInfo = countryInfos.get(i);
+				
+				//[1]补全Property
+				Item item = new Item();
+				item.setName(countryInfo.getCountry());
+				item.setValue(Integer.parseInt(countryInfo.getIpnum()));
+			    
+				//[2]补全geometry，且经度在前，纬度在后
+				Geometry geometry = new Geometry();
+				float[] point = new float[2];
+				point[0] = Float.parseFloat(countryInfo.getLongitude());
+				point[1] = Float.parseFloat(countryInfo.getLatitude());
+				geometry.setType("Point"); //点要素Point
+				geometry.setCoordinates(point);
+				
+				//组装Feature
+				Feature feature = new Feature();
+				feature.setType("Feature"); //geojson固定格式
+				feature.setProperties(item);
+				feature.setGeometry(geometry);
+				
+				features.add(feature);
 			}
 		}
-		
-		return threedResults;
+		ThreedGeojson geo = new ThreedGeojson();
+		geo.setType("FeatureCollection");
+		geo.setFeatures(features);
+		return geo;
 	}
 
 	

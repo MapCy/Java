@@ -37,7 +37,8 @@
         // If GeoJSON files are not on the same domain as your website, a CORS enabled server
         // or a proxy is required.
         const url =
-          "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
+          //"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
+            "http://localhost:8080/map/threed";
 
         // Paste the url into a browser's address bar to download and view the attributes
         // in the GeoJSON file. These attributes include:
@@ -49,7 +50,7 @@
 
         const template = {
           title: "Earthquake Info",
-          content: "Magnitude {mag} {type} hit {place} on {time}",
+          content: "Magnitude {name}: {value}",
           fieldInfos: [
             {
               fieldName: "time",
@@ -62,7 +63,7 @@
 
         const renderer = {
           type: "simple",
-          field: "mag",
+          field: "ipnum",
           symbol: {
             type: "simple-marker",
             color: "orange",
@@ -73,7 +74,7 @@
           visualVariables: [
             {
               type: "size",
-              field: "mag",
+              field: "ipnum",
               stops: [
                 {
                   value: 2.5,

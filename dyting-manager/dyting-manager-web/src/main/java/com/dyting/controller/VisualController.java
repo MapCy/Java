@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.dyting.common.pojo.DytingResult;
 import com.dyting.common.pojo.PortOrService;
-import com.dyting.common.pojo.threed.ThreedResult;
+import com.dyting.common.pojo.threed.ThreedGeojson;
 import com.dyting.service.VisualService;
 
 /*
@@ -44,11 +44,7 @@ public class VisualController {
 	
 	@RequestMapping(value = "/threed")
 	@ResponseBody
-	public DytingResult selectByCountry(){
-		List<ThreedResult> list = visualService.selectFromIbi("China");
-		if (list != null && list.size() > 0) {
-			return DytingResult.ok(list);
-		}
-		return DytingResult.ok();
+	public ThreedGeojson selectByCountry(){
+		return visualService.selectFromIbi("United States");
 	}
 }

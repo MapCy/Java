@@ -1,7 +1,8 @@
 package com.dyting.mapper;
 
 import com.dyting.common.pojo.threed.CityInfo;
-import com.dyting.common.pojo.threed.ThreedResult;
+import com.dyting.common.pojo.threed.CountryInfo;
+import com.dyting.common.pojo.threed.ThreedGeojson;
 import com.dyting.pojo.IpBaseInfo;
 import com.dyting.pojo.IpBaseInfoExample;
 import java.util.List;
@@ -25,6 +26,6 @@ public interface IpBaseInfoMapper {
     //动态SQL查询
     List<CityInfo> selectByCountry(@Param("country") String country);
     
-    //不重复查询国家
-    List<IpBaseInfo> selectDistinctCountry();
+    //按国家分类统计
+    List<CountryInfo> selectCountry();
 }
