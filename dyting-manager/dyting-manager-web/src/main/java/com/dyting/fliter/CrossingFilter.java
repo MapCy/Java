@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  
 public class CrossingFilter implements Filter {
  
-	private boolean isCross = false;
+	private boolean isCross = true;
  
 	@Override
 	public void destroy() {
@@ -28,7 +28,7 @@ public class CrossingFilter implements Filter {
 			HttpServletResponse httpServletResponse = (HttpServletResponse) response;
 			System.out.println("拦截请求: " + httpServletRequest.getServletPath());
 			httpServletResponse.setHeader("Access-Control-Allow-Origin", "*");
-			// httpServletResponse.setHeader("Access-Control-Allow-Methods", "*"); // 表示所有请求都有效
+			//httpServletResponse.setHeader("Access-Control-Allow-Methods", "*"); // 表示所有请求都有效
 			httpServletResponse.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
 			httpServletResponse.setHeader("Access-Control-Max-Age", "0");
 			httpServletResponse.setHeader("Access-Control-Allow-Headers",

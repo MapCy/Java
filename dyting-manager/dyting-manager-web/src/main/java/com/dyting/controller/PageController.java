@@ -24,4 +24,31 @@ public class PageController {
 	public String visualMap(){
 		return "visual_map";
 	}
+	
+	@RequestMapping("/world")
+	public String ICSWorld(){
+		return "world";
+	}
+	
+	@RequestMapping("/china")
+	public String ICSChina(){
+		return "china";
+	}
+	
+	@RequestMapping("/normal")
+	public String ICSNormal(){
+		return "normal";
+	}
+	
+	@RequestMapping("/sumary")
+	public String Sumary(){
+		return "sumary";
+	}
+	
+	@RequestMapping("/flatMap")
+	public String flatMap(){
+		return "flat_map";
+	}
+	
+	
 }

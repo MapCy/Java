@@ -107,13 +107,13 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-					<a href="<%=basePath%>index" class="navbar-brand" style="font-family:rockwell;font-size:20px">Ditecting</a>
+					<a href="<%=basePath%>index" class="navbar-brand" style="font-family:Vladimir Script;font-size:26px">Ditecting</a>
 
 				</div>
 				<div id="navbar" class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
 						<li id="summary">
-							<a href="#" title="统计总览">统计总览</a>
+							<a href="<%=basePath%>sumary" title="统计总览">统计总览</a>
 						</li>
 						<li id="earth">
 							<a href="<%=basePath%>visualMap" title="统计总览">全球态势</a>
@@ -123,15 +123,15 @@
 							<a id="report" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" title="工控报告">工控报告<span class="caret"></span></a>
 							<ul class="dropdown-menu" style="font-family: verdana;">
 								<li>
-									<a href="#">ICS全球分布报表</a>
+									<a href="<%=basePath%>world">ICS全球分布报表</a>
 								</li>
 								<li role="separator" class="divider"></li>
 								<li>
-									<a href="#">ICS中国各省分布报表</a>
+									<a href="<%=basePath%>china">ICS中国各省分布报表</a>
 								</li>
 								<li role="separator" class="divider"></li>
 								<li>
-									<a href="#">ICS常规服务开放报表</a>
+									<a href="<%=basePath%>normal">ICS常规服务开放报表</a>
 								</li>
 							</ul>
 						</li>
@@ -158,7 +158,7 @@
 						<a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>搜索结果</a>
 					</li>
 					<li role="presentation">
-						<a href="#"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>地图展示</a>
+						<a href="<%=basePath%>flatMap"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>地图展示</a>
 					</li>
 				</ul>
 			</div>

@@ -2,6 +2,8 @@ package com.dyting.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +46,10 @@ public class VisualController {
 	
 	@RequestMapping(value = "/threed")
 	@ResponseBody
-	public ThreedGeojson selectByCountry(){
-		return visualService.selectFromIbi("United States");
+	public ThreedGeojson selectByCountry(HttpServletRequest request){
+		String lat = request.getParameter("latitude");
+		String lon = request.getParameter("longitude");
+		System.out.println("---------->"+lat+","+lon);
+		return visualService.selectFromIbi(lat,lon);
 	}
 }

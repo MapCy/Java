@@ -51,13 +51,13 @@ a:hover {
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a href="<%=basePath%>index" class="navbar-brand" style="font-family:rockwell;font-size:20px">Ditecting</a>
+			<a href="<%=basePath%>index" class="navbar-brand" style="font-family:Vladimir Script;font-size:26px">Ditecting</a>
 
 		</div>
 		<div id="navbar" class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<li id="summary">
-					<a href="#" title="统计总览">统计总览</a>
+					<a href="<%=basePath%>sumary" title="统计总览">统计总览</a>
 				</li>
 				<li id="earth">
 					<a href="<%=basePath%>visualMap" title="统计总览">全球态势</a>
@@ -70,15 +70,15 @@ a:hover {
 					</a>
 					<ul class="dropdown-menu" style="font-family: verdana;">
 						<li>
-							<a href="#">ICS全球分布报表</a>
+							<a href="<%=basePath%>world">ICS全球分布报表</a>
 						</li>
 						<li role="separator" class="divider"></li>
 						<li>
-							<a href="#">ICS中国各省分布报表</a>
+							<a href="<%=basePath%>china">ICS中国各省分布报表</a>
 						</li>
 						<li role="separator" class="divider"></li>
 						<li>
-							<a href="#">ICS常规服务开放报表</a>
+							<a href="<%=basePath%>normal">ICS常规服务开放报表</a>
 						</li>
 					</ul>
 				</li>
@@ -180,13 +180,13 @@ a:hover {
 		} 
 		//console.log(text);
 		//分离关键字和值并判断，若存在多组搜索式，则只取第一组。如port:502;service:tcp...则只取port:502
-		var map = text.trim().split(":",2);
+		var map = text.split(":",2);
 		
 		/**************************\
 		*      搜索式合法性验证                        *
 		\**************************/
 		//判断value是否有特殊字符或是否为空
-        var flag = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》/?~！@#￥……&*（）——|{}【】‘；：”“'。，、？ ]");
+        var flag = new RegExp("[`~!@#$^&*()=|{}':;',\\[\\].<>《》?~！@#￥……&*（）|{}【】‘；：”“'。，、？]");
 		if((map[1] == '' || map[1] == undefined || map[1] == null) || flag.test(map[1])){
 			alert("搜索式不合法！");
 			return;

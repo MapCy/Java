@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.dyting.mapper.IpBaseInfoMapper" >
   
+  <select id="selectByLatAndLog" resultType="String">
+      SELECT DISTINCT(country) FROM ip_base_info
+	  WHERE latitude LIKE CONCAT(#{latitude},'%') AND longitude LIKE CONCAT(#{longitude},'%')
+  </select>
+    
   <select id="selectByCountry" resultType="com.dyting.common.pojo.threed.CityInfo">
       SELECT city,latitude,longitude, COUNT(city) AS ipnum
 	  FROM ip_base_info
@@ -17,6 +22,14 @@
       SELECT country,latitude,longitude,COUNT(country) AS ipnum
 	  FROM ip_base_info
 	  GROUP BY country
+  </select>
+  
+  <!-- 统计各国家的经纬度范围 -->
+  <select id="selectPerCountryArea" resultType="com.dyting.common.pojo.TupleCountry">
+      SELECT 
+      country,MIN(-(-latitude)) minlat,MAX(-(-latitude)) maxlat,MIN(-(-longitude)) minlon,MAX(-(-longitude)) maxlon 
+      FROM ip_base_info
+	  WHERE country like CONCAT('%',#{country},'%')
   </select>
   
   <resultMap id="BaseResultMap" type="com.dyting.pojo.IpBaseInfo" >

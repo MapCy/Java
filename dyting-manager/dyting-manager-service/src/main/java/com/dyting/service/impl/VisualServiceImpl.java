@@ -88,7 +88,7 @@ public class VisualServiceImpl implements VisualService {
 
 
 	@Override
-	public ThreedGeojson selectFromIbi(String country) {
+	public ThreedGeojson selectFromIbi(String lat, String lon) {
 		List<CountryInfo> countryInfos = new ArrayList<>();
 		List<CityInfo> cityInfos = new ArrayList<>(); 
 		
@@ -96,6 +96,9 @@ public class VisualServiceImpl implements VisualService {
 		
 		List<ThreedGeojson> thGeojsons = new ArrayList<>();
 
+		//调用service层，根据经纬度获取国家名
+		String country = ipbaseinfoMapper.selectByLatAndLog(lat, lon);
+		//System.out.println("=======>>>>>>>"+country);
 		//当前端点击某个具体的国家时，才统计每个国家下的各城市ip数量
 		if (country != null) {
 			cityInfos = ipbaseinfoMapper.selectByCountry(country); //取出该国家下的每个城市信息

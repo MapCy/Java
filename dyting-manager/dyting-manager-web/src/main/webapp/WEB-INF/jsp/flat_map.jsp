@@ -15,7 +15,7 @@
   -->
 <link rel="stylesheet" href="http://192.168.141.10:8080/ArcGis-4.15/arcgis_js_api/library/4.15/esri/themes/light/main.css">  
 <script src="http://192.168.141.10:8080/ArcGis-4.15/arcgis_js_api/library/4.15/init.js"></script>
-<title>GeoJSONLayer - 4.15</title>
+<title>Flat Map</title>
 
     <style>
       html,
@@ -27,30 +27,25 @@
         width: 100%;
       }
     </style>
-
+    
+    <script src="js/jquery-2.1.1.js"></script>
     <script>
+      //定义全局变量
+      var url;
+     
       require([
         "esri/Map",
         "esri/layers/GeoJSONLayer",
-        "esri/views/MapView"
-      ], function(Map, GeoJSONLayer, MapView) {
-        // If GeoJSON files are not on the same domain as your website, a CORS enabled server
-        // or a proxy is required.
-        const url =
-          //"https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson";
-            "http://localhost:8080/map/threed";
-
-        // Paste the url into a browser's address bar to download and view the attributes
-        // in the GeoJSON file. These attributes include:
-        // * mag - magnitude
-        // * type - earthquake or other event such as nuclear test
-        // * place - location of the event
-        // * time - the time of the event
-        // Use the Arcade Date() function to format time field into a human-readable format
+        "esri/views/MapView",
+        "esri/geometry/Point",
+        "esri/widgets/Zoom",
+        "esri/PopupTemplate"
+      ], function(Map, GeoJSONLayer, MapView, Point, Zoom, PopupTemplate) {
+        url = "http://localhost:8080/map/threed";
 
         const template = {
-          title: "Earthquake Info",
-          content: "Magnitude {name}: {value}",
+          title: "全球工控态势",
+          content: "<h1>{name}: {value}</h1>",
           fieldInfos: [
             {
               fieldName: "time",
@@ -61,6 +56,7 @@
           ]
         };
 
+        
         const renderer = {
           type: "simple",
           field: "ipnum",
@@ -89,15 +85,15 @@
           ]
         };
 
-        const geojsonLayer = new GeoJSONLayer({
+        var geojsonLayer = new GeoJSONLayer({
           url: url,
-          copyright: "USGS Earthquakes",
+          copyright: "Dyting",
           popupTemplate: template,
           renderer: renderer //optional
         });
 
         const map = new Map({
-          basemap: "gray",
+          basemap: "streets",
           layers: [geojsonLayer]
         });
 
@@ -107,6 +103,42 @@
           zoom: 3,
           map: map
         });
+        
+       
+        view.on("click", function(evt) {
+        	view.hitTest(evt).then(function (response) {
+        		console.log(response);
+                var result = response.results[0];
+                if (result && result.graphic) {
+                	//获取当前点击处的经纬度并取整数部分
+                	var lat = parseInt(result.graphic.geometry.latitude);
+                	var lon = parseInt(result.graphic.geometry.longitude);
+                	
+                    console.log("你点了我: ["+lat+","+lon+"]"+typeof(lat));
+    
+                    var countryUrl = "http://localhost:8080/map/threed?latitude="+lat+"&longitude="+lon+"";
+                    
+                    //放大点击部分
+                    var zoom = new Zoom({
+                    	view: view
+                    });
+                    zoom.zoomIn();
+                    
+                    console.log(countryUrl);
+           
+                    var countryLayer = new GeoJSONLayer({
+                        url: countryUrl,
+                        copyright: "Dyting",
+                        popupTemplate: template,
+                        renderer: renderer //optional
+                      });
+
+                    map.add(countryLayer);
+                    console.log("Layer:"+map.allLayers.length);
+                }
+            })
+        });
+        
       });
     </script>
   </head>

@@ -236,7 +236,7 @@
 							value: [dataItem[1], dataItem[0],dataItem[2]]
 						}
 					});
-					console.log(data);
+					//console.log(data);
 					
 					var Opt = {
 						backgroundColor: "#000",
