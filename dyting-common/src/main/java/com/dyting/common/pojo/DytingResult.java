@@ -6,7 +6,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * 淘淘商城自定义响应结构
+ * 谛听自定义响应结构
  */
 public class DytingResult {
 
@@ -82,13 +82,7 @@ public class DytingResult {
         this.data = data;
     }
 
-    /**
-     * 将json结果集转化为TaotaoResult对象
-     * 
-     * @param jsonData json数据
-     * @param clazz TaotaoResult中的object类型
-     * @return
-     */
+ 
     public static DytingResult formatToPojo(String jsonData, Class<?> clazz) {
         try {
             if (clazz == null) {

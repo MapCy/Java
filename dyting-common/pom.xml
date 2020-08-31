@@ -49,5 +49,28 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-log4j12</artifactId>
 		</dependency>
+		<dependency>  
+		    <groupId>com.alibaba</groupId>  
+		    <artifactId>fastjson</artifactId>  
+		    <version>1.2.41</version>  
+        </dependency>
+        
+        <!-- fileUtils工具包实现需要的一些Maven依赖 -->
+        <dependency>    
+            <groupId>net.sf.json-lib</groupId>    
+            <artifactId>json-lib</artifactId>    
+            <version>2.4</version>    
+            <classifier>jdk15</classifier>    
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+            <version>20160810</version>
+        </dependency>
+        <dependency>
+		    <groupId>xom</groupId>
+		    <artifactId>xom</artifactId>
+		    <version>1.2.5</version>
+		</dependency>
 	</dependencies>
 </project>
